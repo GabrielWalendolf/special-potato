@@ -67,7 +67,7 @@ A lógica para inserir dados de teste está na classe `PotatoApplication.java`.
 
 ### Passo 4: Execuções Futuras (Apenas Consultas)
 
-Após a primeira execução, o banco de dados já contém os dados. Para evitar erros de duplicatas (`UniqueConstraintException`) nas próximas vezes que você rodar o projeto, você deve desativar a inserção de dados.
+Após a primeira execução, o banco de dados já contém os dados. Para conseguir executar as consultas corretamente sem interrupções nas próximas vezes que você rodar o projeto, você deve desativar a inserção de dados.
 
 1.  **Desative a Inserção de Dados:** Volte ao arquivo `PotatoApplication.java` e **comente todo o bloco de código** que está dentro da seção `--- 1. INSERÇÃO DE DADOS DE EXEMPLO ---`.
 
