@@ -8,7 +8,7 @@ O objetivo deste projeto é demonstrar a aplicação prática de conceitos de pe
 - Mapear um modelo relacional de banco de dados para entidades Java.
 - Realizar operações de CRUD (Create, Read, Update, Delete).
 - Executar consultas complexas para obter insights, como os vídeos mais assistidos e mais bem avaliados.
-- Gerenciar a inicialização de dados de forma controlada através de perfis do Spring.
+- Inclui uma rotina para popular o banco de dados com dados de teste na primeira execução.
 
 ---
 
@@ -49,14 +49,9 @@ spring.datasource.password=SUA_SENHA_AQUI
 
 ### Passo 3: A Primeira Execução (Populando o Banco de Dados)
 
-Este projeto utiliza um **perfil do Spring** chamado `init-db` para popular o banco de dados com dados de teste (categorias, vídeos, usuários, etc.). Esta operação deve ser executada **apenas uma vez**.
+A lógica para inserir dados de teste está na classe `PotatoApplication.java`.
 
-1.  **Ative o Perfil de Inicialização:** No arquivo `application.properties`, encontre e **descomente** a linha abaixo:
-
-    ```properties
-    # Descomente a linha abaixo APENAS para a primeira execução.
-    spring.profiles.active=init-db
-    ```
+1.  **Verifique o Código:** Abra o arquivo `src/main/java/com/special/potato/PotatoApplication.java`. Certifique-se de que o bloco de código sob o comentário `--- 1. INSERÇÃO DE DADOS DE EXEMPLO ---` **não está comentado**.
 
 2.  **Execute a Aplicação:** Inicie o projeto através da sua IDE (executando a classe `PotatoApplication.java`) ou via Maven no terminal:
 
@@ -66,22 +61,28 @@ Este projeto utiliza um **perfil do Spring** chamado `init-db` para popular o ba
 
     Neste momento, a aplicação irá:
     - Conectar-se ao banco de dados.
-    - Criar todas as tabelas (`usuario`, `video`, etc.), pois `spring.jpa.hibernate.ddl-auto=update` está ativo.
-    - Executar a lógica de inserção de dados definida na classe `DataInitializer.java`.
+    - Criar todas as tabelas, pois `spring.jpa.hibernate.ddl-auto=update` está ativo.
+    - Executar a lógica de inserção de dados.
     - Executar as consultas de teste sobre os dados recém-inseridos.
 
 ### Passo 4: Execuções Futuras (Apenas Consultas)
 
-Após a primeira execução bem-sucedida, o banco de dados já contém os dados de teste. Para evitar erros de duplicatas (`UniqueConstraintException`) e executar a aplicação em seu modo normal (apenas para consultas ou futuras operações da API), você **DEVE** desativar o perfil de inicialização.
+Após a primeira execução, o banco de dados já contém os dados. Para evitar erros de duplicatas (`UniqueConstraintException`) nas próximas vezes que você rodar o projeto, você deve desativar a inserção de dados.
 
-1.  **Desative o Perfil de Inicialização:** Volte ao arquivo `application.properties` e **comente** a linha que você ativou anteriormente:
+1.  **Desative a Inserção de Dados:** Volte ao arquivo `PotatoApplication.java` e **comente todo o bloco de código** que está dentro da seção `--- 1. INSERÇÃO DE DADOS DE EXEMPLO ---`.
 
-    ```properties
-    # Comente a linha abaixo após a primeira execução bem-sucedida.
-    # spring.profiles.active=init-db
+    **Exemplo de como comentar:**
+    ```java
+    /* // Início do comentário
+    // --- 1. INSERÇÃO DE DADOS DE EXEMPLO ---
+    System.out.println("==================================================");
+    System.out.println("INICIANDO A INSERÇÃO DE DADOS DE TESTE...");
+    // ... todo o código de inserção ...
+    System.out.println("\nDados de teste inseridos com sucesso!\n");
+    */ // Fim do comentário
     ```
 
-2.  **Execute a Aplicação Novamente:** Rode o projeto da mesma forma. Agora, a aplicação irá iniciar normalmente, executar as consultas de teste sobre os dados que já existem no banco, mas **não tentará inserir os dados de teste novamente**.
+2.  **Execute a Aplicação Novamente:** Rode o projeto da mesma forma. Agora, a aplicação irá iniciar, pular o bloco de inserção de dados e executar apenas as consultas sobre os dados que já existem no banco.
 
 ---
 
@@ -92,20 +93,18 @@ Após a primeira execução bem-sucedida, o banco de dados já contém os dados 
 O diagrama abaixo reflete a estrutura das entidades Java e seus relacionamentos, implementados com JPA.
 
 ![Diagrama de Classes do Sistema de Streaming](docs/DiagramaUML.png)
-*(O arquivo de imagem deve estar localizado em `docs/DiagramaUML.png`)*
-
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-| Categoria      | Tecnologia            | Descrição                                               |
-|----------------|-----------------------|---------------------------------------------------------|
-| Linguagem      | **Java 25**           | Base do projeto.                                        |
-| Framework      | **Spring Boot 3.5.6** | Ecossistema principal para desenvolvimento rápido.      |
-| Acesso a Dados | **Spring Data JPA**   | Camada de abstração para persistência de dados.         |
-| ORM            | **Hibernate**         | Implementação do JPA para mapeamento objeto-relacional. |
-| Banco de Dados | **PostgreSQL**        | Sistema de gerenciamento de banco de dados relacional.  |
-| Build          | **Maven**             | Gerenciador de dependências e build do projeto.         |
+| Categoria      | Tecnologia      | Descrição                                               |
+|----------------|-----------------|---------------------------------------------------------|
+| Linguagem      | **Java 17**     | Base do projeto.                                        |
+| Framework      | **Spring Boot 3** | Ecossistema principal para desenvolvimento rápido.      |
+| Acesso a Dados | **Spring Data JPA** | Camada de abstração para persistência de dados.         |
+| ORM            | **Hibernate**   | Implementação do JPA para mapeamento objeto-relacional. |
+| Banco de Dados | **PostgreSQL**  | Sistema de gerenciamento de banco de dados relacional.  |
+| Build          | **Maven**       | Gerenciador de dependências e build do projeto.         |
 
 ---
 
