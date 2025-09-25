@@ -18,7 +18,7 @@ Para executar este projeto, siga os passos abaixo. É crucial seguir a ordem par
 
 ### Pré-requisitos
 
-- **Java JDK 17** ou superior.
+- **Java JDK 25** ou superior.
 - **Maven 3.8** ou superior.
 - **PostgreSQL** instalado e em execução.
 - Um cliente SQL de sua preferência (DBeaver, pgAdmin, etc.) para criar o banco de dados.
@@ -97,14 +97,14 @@ O diagrama abaixo reflete a estrutura das entidades Java e seus relacionamentos,
 
 ## 🛠️ Tecnologias Utilizadas
 
-| Categoria      | Tecnologia      | Descrição                                               |
-|----------------|-----------------|---------------------------------------------------------|
-| Linguagem      | **Java 17**     | Base do projeto.                                        |
-| Framework      | **Spring Boot 3** | Ecossistema principal para desenvolvimento rápido.      |
+| Categoria      | Tecnologia          | Descrição                                               |
+|----------------|---------------------|---------------------------------------------------------|
+| Linguagem      | **Java 25**          | Base do projeto.                                        |
+| Framework      | **Spring Boot 3**   | Ecossistema principal para desenvolvimento rápido.      |
 | Acesso a Dados | **Spring Data JPA** | Camada de abstração para persistência de dados.         |
-| ORM            | **Hibernate**   | Implementação do JPA para mapeamento objeto-relacional. |
-| Banco de Dados | **PostgreSQL**  | Sistema de gerenciamento de banco de dados relacional.  |
-| Build          | **Maven**       | Gerenciador de dependências e build do projeto.         |
+| ORM            | **Hibernate**       | Implementação do JPA para mapeamento objeto-relacional. |
+| Banco de Dados | **PostgreSQL**      | Sistema de gerenciamento de banco de dados relacional.  |
+| Build          | **Maven**           | Gerenciador de dependências e build do projeto.         |
 
 ---
 
